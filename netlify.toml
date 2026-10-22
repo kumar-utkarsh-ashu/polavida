@@ -1,0 +1,24 @@
+# Pola Vida homepage prototype: static site, no build step.
+# Deploy: drag this folder onto app.netlify.com/drop, or connect it to a repo with publish = "."
+[build]
+  publish = "."
+  command = ""
+
+# Prototype for client approval: keep it out of search engines
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
