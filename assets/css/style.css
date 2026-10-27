@@ -843,12 +843,14 @@ html.anim [data-r=zoom].in{transform:none}
 [data-skin=b] .summary .btn-ghost{color:var(--cream);border-color:var(--cream)}
 [data-skin=b] .summary .btn-ghost:hover{background:var(--cream);color:var(--wine)}
 [data-skin=b] .no-frame::before{display:none!important}
-.bg-mandala{position:absolute;pointer-events:none;color:var(--gold);opacity:.18}
-.bg-mandala.m-tr{top:-80px;right:-80px;width:440px;height:440px}
-.bg-mandala.m-bl{bottom:-80px;left:-80px;width:440px;height:440px}
-.bg-yantra{position:absolute;pointer-events:none;color:var(--gold);opacity:.14}
-.bg-yantra.y-tr{top:-60px;right:-60px;width:400px;height:400px}
-.bg-yantra.y-bl{bottom:-60px;left:-60px;width:400px;height:400px}
+/* Decorative Background Mandalas & Yantras */
+.mandala, .bg-mandala, .bg-yantra, svg.mandala, svg.bg-mandala, svg.bg-yantra{position:absolute!important;pointer-events:none!important;color:var(--gold)!important;opacity:.18!important;z-index:0!important}
+.bg-mandala,.mandala.bg-mandala{width:440px!important;height:440px!important;max-width:45vw!important;max-height:45vw!important}
+.bg-mandala.m-tr,.mandala.m-tr{top:-80px!important;right:-80px!important;left:auto!important;bottom:auto!important}
+.bg-mandala.m-bl,.mandala.m-bl{bottom:-80px!important;left:-80px!important;top:auto!important;right:auto!important}
+.bg-yantra{width:400px!important;height:400px!important;max-width:40vw!important;max-height:40vw!important;opacity:.14!important}
+.bg-yantra.y-tr{top:-60px!important;right:-60px!important;left:auto!important;bottom:auto!important}
+.bg-yantra.y-bl{bottom:-60px!important;left:-60px!important;top:auto!important;right:auto!important}
 [data-skin=b] .panel{border-radius:6px}
 .hidden{display:none!important}
 /* four-card sets: one row of four (A) / 2x2 (B) */

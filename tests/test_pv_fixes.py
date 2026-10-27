@@ -47,9 +47,11 @@ class TestPolavidaFixes(unittest.TestCase):
         self.assertNotIn('class="mini-medal"', html,
                          "Inconsistent mini-medal icons should be removed from all event cards")
         
-        # Point 2: Incorporate mandala icons in background
+        # Point 2: Incorporate mandala icons in background with safe positioning
         self.assertIn('href="#i-mandala"', html,
                       "events.html should incorporate mandala background SVGs (#i-mandala)")
+        self.assertIn('position:absolute', html,
+                      "Background SVGs must have inline position:absolute safety styles so they never break document flow")
 
     # ---------------------------------------------------------
     # 3. Booking Page (booking.html)
