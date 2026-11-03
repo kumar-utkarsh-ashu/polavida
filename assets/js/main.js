@@ -317,6 +317,86 @@
     });
   });
 
-  /* ---------- lesson player (prototype) ---------- */
-  document.querySelectorAll('[data-video]').forEach(function (b) { b.addEventListener('click', function () { toast('Video plays here for logged-in members (hosting: SproutVideo or Vimeo, to be confirmed).'); }); });
+  /* ---------- global video player modal ---------- */
+  (function () {
+    var vModal = document.createElement('div');
+    vModal.className = 'lb video-modal';
+    vModal.setAttribute('role', 'dialog');
+    vModal.setAttribute('aria-label', 'Video Player');
+    vModal.hidden = true;
+    vModal.innerHTML = '<button class="lb-x" type="button" aria-label="Close video">&times;</button>' +
+      '<div class="vmodal-wrap">' +
+      '<video controls preload="metadata" playsinline class="vmodal-video"></video>' +
+      '<div class="vmodal-cap"></div>' +
+      '</div>';
+    document.body.appendChild(vModal);
+
+    var video = vModal.querySelector('.vmodal-video');
+    var cap = vModal.querySelector('.vmodal-cap');
+
+    var sampleVideos = [
+      'assets/video/testimonial-1.mp4',
+      'assets/video/testimonial-2.mp4',
+      'assets/video/testimonial-3.mp4'
+    ];
+
+    function openVideo(src, title) {
+      video.src = src;
+      cap.textContent = title || '';
+      vModal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      setTimeout(function () { vModal.classList.add('open'); }, 10);
+      video.play().catch(function () {});
+    }
+
+    function closeVideo() {
+      video.pause();
+      video.currentTime = 0;
+      video.src = '';
+      vModal.classList.remove('open');
+      document.body.style.overflow = '';
+      setTimeout(function () { vModal.hidden = true; }, 250);
+    }
+
+    vModal.querySelector('.lb-x').addEventListener('click', closeVideo);
+    vModal.addEventListener('click', function (e) {
+      if (e.target === vModal) closeVideo();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !vModal.hidden) closeVideo();
+    });
+
+    var count = 0;
+    document.querySelectorAll('[data-video]').forEach(function (b) {
+      if (b.closest('.hero-lesson') || b.closest('.lesson-video-box')) {
+        b.addEventListener('click', function (e) {
+          e.preventDefault();
+          toast('Video plays here for logged-in members (hosting: SproutVideo or Vimeo, to be confirmed).');
+        });
+        return;
+      }
+
+      var videoSrc = b.getAttribute('data-video-src');
+      if (!videoSrc) {
+        videoSrc = sampleVideos[count % sampleVideos.length];
+        count++;
+      }
+
+      b.style.cursor = 'pointer';
+      b.addEventListener('click', function (e) {
+        e.preventDefault();
+        var title = b.getAttribute('aria-label') || b.textContent.trim() || 'Video Preview';
+        openVideo(videoSrc, title);
+      });
+    });
+  })();
+
+  document.querySelectorAll('.video-container video').forEach(function (v) {
+    v.addEventListener('play', function () {
+      var s = v.closest('[data-slider]');
+      if (s && s._pause) s._pause();
+    });
+  });
+
 })();

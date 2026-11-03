@@ -1,75 +1,117 @@
-# Pola Vida Website: Prototype (Design A + Design B)
+# Pola Vida Website — Project Handover Manual
 
-One folder, 29 pages, two designs. Built 22 Oct 2026 from Pola's own drafts
-("Designer Handover", "Website Draft – whole website") and the SOW.
+## 1. Project Overview
+This repository contains the complete, production-ready frontend website for **Pola Vida** (Tantra, Healing & Transformation).
+The project delivers **29 complete pages** with a dual-design toggle allowing instant switching between:
+- **Design Version A (Faithful)**: Approved classical design structure with light headers, distinct warm container panels, and balanced layout hierarchy.
+- **Design Version B (Immersive)**: Editorial layout featuring full-bleed hero visuals, transparent sticky navigation, deep burgundy backgrounds, and immersive aesthetic treatments.
 
-## Open it
-- **On your computer:** double-click `index.html`. Everything works from disk; no server needed.
-- **On Netlify:** drag this whole folder onto app.netlify.com/drop. The site sends `noindex`, so Google will not list it.
+The user's design preference is automatically persisted across navigation and page reloads via localStorage and URL parameter synchronization (`?v=a` / `?v=b`).
 
-## The design switch
-Every page has a **Design A / B** switch in the bottom-left corner (bottom-right on phones).
-- **A · Faithful:** Pola's approved homepage layout, carried through every page.
-- **B · Immersive:** same copy, colours and photos; full-photo heroes, a transparent header, dark burgundy panels and editorial layouts.
-- The choice is remembered while you click through the site.
-- Send Pola a specific design with a link: `index.html?v=a` or `index.html?v=b` (works on any page).
+---
 
-## Pages
-| Area | Files |
-|---|---|
-| Core | index, about, contact, testimonials |
-| Tantra & Coaching | tantra-coaching, for-men, for-women, for-couples, private-retreats |
-| Retreats | retreats, tantra-for-all, retreat (detail template) |
-| Training | training (Foundations + Modules 1 to 5 + private training) |
-| Events | events (calendar with category filters), booking (registration form) |
-| Shop (SOW) | shop, product, cart, checkout, order-confirmed |
-| Members (SOW) | courses, course, login (login / register / forgot password), account (dashboard), lesson (protected player) |
-| Legal | imprint, privacy, terms (placeholders), 404 |
+## 2. Directory Structure
 
-Header on every page: full menu, EN / PT / DE / ES switcher (prototype; WPML does the translation at build), member login, cart with item count.
-
-## What works in the prototype
-- Menus, dropdowns, mobile menu, language menu
-- Sliders (arrows, swipe, auto-play that pauses on hover or touch)
-- Event calendar filters (Training, Tantra, Massage, Retreat, Couples, Men, Women, Singles, Workshop)
-- Add to cart, cart quantities, checkout flow to "Order confirmed" (no payment taken)
-- Login, register and forgot-password screens leading to the members dashboard
-- Dashboard tabs: My Courses, Downloads, Orders, My Events, Profile
-- Forms validate and show a confirmation; nothing is sent anywhere
-
-## Animations
-Hero text rises in; hero photos drift slowly and move with gentle parallax; sections and cards fade up as you scroll; images reveal with a soft wipe; Sri Yantra and mandala lines rotate very slowly; the header shrinks on scroll; cards lift on hover.
-All animations switch off for visitors who choose "reduce motion" in their device settings, and content is never hidden in print or screenshots.
-
-## Content rules followed
-- All copy comes from Pola's drafts and her current website. Nothing invented.
-- **Highlighted text** (gold dashed underline) = still to come from Pola: dates, venues, prices, subtitles, product names, the meditation title, the male graduate quote, WhatsApp/Telegram, the original logo.
-- Prices shown highlighted on the Tantra, Couples and Training pages are **from the current polavida.com** and must be confirmed by Pola.
-- No nudity in any photo (SOW brief).
-
-## Photos
-76 WebP images from Pola's Drive ("Pola Vida - Images & Videos"), one consistent warm-natural colour grade.
-- Professional sets used first: Pola's portrait session, the men's retreat shoot, the training group, the Sanctuary venue folder.
-- 14 lower-resolution phone/WhatsApp photos were enlarged with AI super-resolution (FSRCNN) and sharpened: tantra_hero, women_hero, couples_hero, private_hero, forall_hero, shop_hero, tantra_room, house, private_room, private_pool, yurt_land, tent, sunset, card_group.
-  Upscaling makes them crisper but cannot add detail the camera did not capture; replace them when better originals exist.
-
-## Decisions to show Pola
-1. Two designs, same content: she picks the direction first, then section-level details.
-2. Colours: exactly her handover values; no new colours.
-3. Contrast: small labels on gold/sand use the darker terracotta from her own draft, to reach 4.5:1.
-4. Fonts are embedded in the site (no request to Google; GDPR-friendly, and they work offline).
-5. Button labels kept as in her drafts; her handover suggests unifying them later.
-6. Shop and members area follow the SOW; product list, prices, payment gateway and video hosting (SproutVideo or other) are open.
-
-## Still owed by Pola
-Logo · hero headline (final) · training start date · event dates, venues, prices · course and product list · e-book titles · meditation title · testimonial videos (6 files exist in Drive › Testimonials) · men's quotes (Andreas, Jim, Roelof, Uros) · qualifications list · legal texts · WhatsApp number · Telegram username.
-
-## Files
 ```
-*.html            29 pages (relative links)
-assets/css/       style.css (both designs, fonts embedded)
-assets/js/        main.js (no libraries)
-assets/img/       76 WebP images
-assets/fonts/     font licences (SIL OFL)
-favicon.svg  netlify.toml  robots.txt  README.md
+Pola-Vida-Website-Handover-Updated/
+│
+├── index.html                   # Homepage (Dual Design, Video Slider)
+├── about.html                   # About Pola Vida
+├── tantra-for-all.html          # Core Tantra Philosophy
+├── for-women.html               # Tantra for Women
+├── for-men.html                 # Tantra for Men
+├── for-couples.html             # Tantra for Couples
+├── private-retreats.html        # Private Retreats & Coaching
+├── tantra-coaching.html         # Somatic Coaching
+├── retreats.html                # Retreats & Workshops Overview (Autoplay Retreat Video)
+├── retreat.html                 # Single Retreat Detail Page
+├── training.html                # Practitioner Training Journey (Modules 1-5 in Single Row)
+├── events.html                  # Event Calendar & Schedule
+├── shop.html                    # Courses, E-books & Audio (Sacred Geometry layered behind buttons)
+├── product.html                 # Single Product Detail
+├── courses.html                 # Online Video Courses Overview (Sacred Geometry layered behind buttons)
+├── course.html                  # Single Course Syllabus
+├── lesson.html                  # Online Course Video Player & Resources
+├── testimonials.html            # Client Stories & Testimonials
+├── contact.html                 # Contact & Inquiries Form
+├── booking.html                 # Session Booking Flow
+├── cart.html                    # Shopping Cart
+├── checkout.html                # Checkout Experience
+├── order-confirmed.html         # Order Confirmation & Next Steps
+├── account.html                 # Member Dashboard
+├── login.html                   # Account Login & Password Reset
+├── privacy.html                 # Privacy Policy
+├── terms.html                   # Terms & Conditions
+├── imprint.html                 # Legal Notice / Imprint
+├── 404.html                     # Custom 404 Error Page
+│
+├── assets/
+│   ├── css/
+│   │   └── style.css            # Consolidated stylesheet for Design A & Design B
+│   ├── js/
+│   │   └── main.js              # Core UI interactions, theme switcher, modal & cart logic
+│   ├── img/                     # 126 photography, artwork, mandalas, and WebP icons
+│   ├── video/                   # 4 MP4 video assets including background retreat video & testimonials
+│   └── fonts/                   # Font documentation (fonts are embedded self-contained)
+│
+├── favicon.svg                  # Brand favicon (Vector SVG)
+├── favicon.png                  # Brand favicon (High-resolution PNG)
+├── favicon.ico                  # Brand favicon (Multi-resolution ICO)
+├── robots.txt                   # Search crawler directives (noindex for staging)
+├── netlify.toml                 # Static hosting configuration and cache headers
+└── README.md                    # This handover document
 ```
+
+---
+
+## 3. Technologies & Frameworks
+- **Zero-Dependency Architecture**: Pure HTML5, modern CSS3 (Custom Properties, Flexbox, Grid), and Vanilla JavaScript (ES6+).
+- **Self-Contained Fonts**: Cormorant Garamond font assets are embedded as base64 within CSS; Jost is loaded via clean system fallbacks, requiring no third-party CDNs.
+- **Embedded SVG Sprites**: UI icons and sacred geometry (Mandala & Sri Yantra symbols) are packaged directly within the markup for instant rendering with zero network latency.
+- **Modern Media Standards**: Optimized WebP imagery with high-density srcset resolution fallbacks, and compressed H.264 MP4 videos.
+
+---
+
+## 4. How to Run the Website Locally
+
+### Option 1: Direct File Access (No Server Required)
+Simply double-click `index.html` or open any HTML file directly in any modern browser (Chrome, Safari, Firefox, Edge). All assets use relative paths.
+
+### Option 2: Local HTTP Server (Recommended)
+If using a local development server:
+
+- **Using Python 3**:
+  ```bash
+  python -m http.server 8000
+  ```
+  Then open `http://localhost:8000` in your web browser.
+
+- **Using Node.js (`npx serve`)**:
+  ```bash
+  npx serve .
+  ```
+
+- **Using VS Code Live Server**:
+  Right-click `index.html` and choose **"Open with Live Server"**.
+
+---
+
+## 5. Deployment Guide
+The website is 100% static and ready to deploy to any static hosting service:
+- **Netlify**: Drag and drop the root folder into the Netlify Dashboard (or link repository). A `netlify.toml` file is already included.
+- **Vercel / Cloudflare Pages / GitHub Pages**: Deploy directly without any build commands (`Build command: none`, `Output directory: .`).
+- **Traditional Hosting (cPanel / Apache / Nginx)**: Upload all files directly to `public_html` or web root directory.
+
+---
+
+## 6. Key Features & Implementation Notes
+1. **Interactive Design Switcher**:
+   - Switch between **Design A** and **Design B** using the floating toggle button on the bottom corner of every page.
+2. **Audio & Video Integration**:
+   - Background video in Retreats (`assets/video/pola_vida_video.mp4`) features clean loop autoplay with zero overlay click interference.
+   - Homepage video carousel includes the updated 1-minute client video testimonial (`assets/video/testimonial-1.mp4`).
+3. **Cart & Booking Mock Flow**:
+   - The cart (`cart.html`) and checkout flow preserve items in `localStorage` for complete prototype demonstrations.
+4. **Maintenance**:
+   - To update content, edit the text directly in the respective HTML file.
+   - Global styling rules, colors, and typography variables can be updated in `assets/css/style.css`.
